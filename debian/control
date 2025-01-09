@@ -1,15 +1,34 @@
-Source: template-repository
-Section: unknown
+Source: pytest-jupyter
+Maintainer: Debian Python Team <team+python@tracker.debian.org>
+Uploaders: Julian Gilbey <jdg@debian.org>,
+           Julien Puydt <jpuydt@debian.org>,
+           Gordon Ball <gordon@chronitis.net>
+Section: python
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Standards-Version: 4.7.0
+Homepage: https://github.com/jupyter-server/pytest-jupyter
+Build-Depends: debhelper-compat (= 13),
+               dh-sequence-python3,
+               pybuild-plugin-pyproject,
+               python3-all,
+               python3-hatchling,
+               python3-jupyter-core (>= 5.7),
+               python3-pytest
+Vcs-Git: https://salsa.debian.org/python-team/packages/pytest-jupyter.git
+Vcs-Browser: https://salsa.debian.org/python-team/packages/pytest-jupyter
+Rules-Requires-Root: no
 
-Package: template-repository
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Package: python3-pytest-jupyter
+Architecture: all
+Depends: python3-ipykernel,
+         python3-jupyter-core (>= 5.7),
+         python3-jupyter-client,
+         python3-nbformat,
+         ${misc:Depends},
+         ${python3:Depends}
+Suggests: python3-jupyter-server
+Description: Pytest plugins for Jupyter libraries and extensions
+ This set of pytest plugins are used for testing Jupyter.
+ It includes an echo kernel to speed up testing.  It uses pytest-tornasync
+ internally for async test suite running, and may not be compatible with
+ pytest-asyncio.

@@ -1,4 +1,10 @@
 #!/usr/bin/make -f
 
+#export DH_VERBOSE=1
+export LC_ALL=C.UTF-8
+
 %:
-	dh $@
+	dh $@ --buildsystem=pybuild
+
+override_dh_auto_test:
+	@echo "Tests require package to be installed, so skipping during build"
