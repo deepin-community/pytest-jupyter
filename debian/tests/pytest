@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -e
+
+arch=$(dpkg --print-architecture)
+status=0
+
+cp -a pyproject.toml tests "$AUTOPKGTEST_TMP"
+cd "$AUTOPKGTEST_TMP"
+
+for py in $(py3versions -s)
+do
+    echo "Testing with $py:"
+    set +e
+    $py -m pytest -vv
+    ret=$?
+    set -e
+    if [ $status -eq 0 -a $ret -ne 0 ]
+    then
+	if [ $arch == riscv64 ]
+	then
+	    status=77
+	else
+	    status=$ret
+	fi
+    fi
+done
+
+exit $status

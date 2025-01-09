@@ -1,0 +1,7 @@
+Tests: pytest
+Depends: python3-all,
+         python3-jupyter-server,
+         python3-pytest,
+         python3-pytest-timeout,
+         @
+Restrictions: allow-stderr, skippable
